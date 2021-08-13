@@ -152,7 +152,7 @@ class Repositories extends AbstractApi
      */
     public function createRelease($project_id, string $tag_name, string $description)
     {
-        return $this->post($this->getProjectPath($project_id, 'repository/tags/'.self::encodePath($tag_name).'/release'), [
+        return $this->post($this->getProjectPath($project_id, 'releases'), [
             'id' => $project_id,
             'tag_name' => $tag_name,
             'description' => $description,
@@ -168,7 +168,7 @@ class Repositories extends AbstractApi
      */
     public function updateRelease($project_id, string $tag_name, string $description)
     {
-        return $this->put($this->getProjectPath($project_id, 'repository/tags/'.self::encodePath($tag_name).'/release'), [
+        return $this->put($this->getProjectPath($project_id, 'releases/'.self::encodePath($tag_name)), [
             'id' => $project_id,
             'tag_name' => $tag_name,
             'description' => $description,
