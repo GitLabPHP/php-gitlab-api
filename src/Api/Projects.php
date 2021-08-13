@@ -49,6 +49,7 @@ class Projects extends AbstractApi
      *     @var bool               $wiki_checksum_failed        Limit by failed wiki checksum calculation
      *     @var bool               $with_custom_attributes      Include custom attributes in response
      *     @var string             $with_programming_language   Limit by programming language
+     *     @var string             $topic                       Limit by topic
      * }
      *
      * @throws UndefinedOptionsException If an option name is undefined
@@ -147,6 +148,7 @@ class Projects extends AbstractApi
             ->setNormalizer('with_custom_attributes', $booleanNormalizer)
         ;
         $resolver->setDefined('with_programming_language');
+        $resolver->setDefined('topic');
 
         return $this->get('projects', $resolver->resolve($parameters));
     }
