@@ -1326,11 +1326,25 @@ final class Project extends AbstractModel
     }
 
     /**
+     * @param int|string $project_id
+     * @param array      $parameters {
+     *
+     *     @var string $scope       the scope of pipelines, one of: running, pending, finished, branches, tags
+     *     @var string $status      the status of pipelines, one of: running, pending, success, failed, canceled, skipped
+     *     @var string $ref         the ref of pipelines
+     *     @var string $sha         the sha of pipelines
+     *     @var bool   $yaml_errors returns pipelines with invalid configurations
+     *     @var string $name        the name of the user who triggered pipelines
+     *     @var string $username    the username of the user who triggered pipelines
+     *     @var string $order_by    order pipelines by id, status, ref, or user_id (default: id)
+     *     @var string $order       Sort pipelines in asc or desc order (default: desc).
+     * }
+     *
      * @return Pipeline[]
      */
-    public function pipelines()
+    public function pipelines(array $parameters = [])
     {
-        $data = $this->client->projects()->pipelines($this->id);
+        $data = $this->client->projects()->pipelines($this->id, $parameters);
 
         $pipelines = [];
         foreach ($data as $pipelineData) {
