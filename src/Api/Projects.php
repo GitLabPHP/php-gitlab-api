@@ -561,6 +561,41 @@ class Projects extends AbstractApi
 
     /**
      * @param int|string $project_id
+     * @param array      $parameters {
+     *
+     *     @var string $email                  the email of the new member or multiple emails separated by commas
+     *     @var int $access_level              a valid access level
+     *     @var \DateTimeInterface $expires_at a date string in the format YEAR-MONTH-DAY
+     *     @var string $invite_source          the source of the invitation that starts the member creation process.
+     *     @var string $areas_of_focus         areas the inviter wants the member to focus upon
+     * }
+     *
+     * @return mixed
+     */
+    public function addInvitation($project_id, array $parameters = [])
+    {
+        $resolver = $this->createOptionsResolver();
+
+        $datetimeNormalizer = function (Options $resolver, \DateTimeInterface $value): string {
+            return $value->format('Y-m-d');
+        };
+
+        $resolver->setDefined('email');
+        $resolver->setDefined('access_level')
+            ->setAllowedValues('access_level', [0, 5, 10, 20, 30, 40, 50])
+        ;
+        $resolver->setDefined('expires_at')
+            ->setAllowedTypes('expires_at', \DateTimeInterface::class)
+            ->setNormalizer('expires_at', $datetimeNormalizer)
+        ;
+        $resolver->setDefined('invite_source');
+        $resolver->setDefined('areas_of_focus');
+
+        return $this->post($this->getProjectPath($project_id, 'invitations'), $resolver->resolve($parameters));
+    }
+
+    /**
+     * @param int|string $project_id
      * @param array      $parameters
      *
      * @return mixed
