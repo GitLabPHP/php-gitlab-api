@@ -410,6 +410,40 @@ class UsersTest extends TestCase
     /**
      * @test
      */
+    public function shouldActivateUser(): void
+    {
+        $expectedBool = true;
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('post')
+            ->with('users/1/activate')
+            ->will($this->returnValue($expectedBool))
+        ;
+
+        $this->assertEquals($expectedBool, $api->activate(1));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldDeactivateUser(): void
+    {
+        $expectedBool = true;
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('post')
+            ->with('users/1/deactivate')
+            ->will($this->returnValue($expectedBool))
+        ;
+
+        $this->assertEquals($expectedBool, $api->deactivate(1));
+    }
+
+    /**
+     * @test
+     */
     public function shouldShowCurrentUser(): void
     {
         $expectedArray = ['id' => 1, 'name' => 'Matt'];
