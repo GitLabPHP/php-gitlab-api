@@ -41,6 +41,11 @@ class MergeRequests extends AbstractApi
     public const STATE_CLOSED = 'closed';
 
     /**
+     * @var string
+     */
+    public const STATE_LOCKED = 'locked';
+
+    /**
      * @param int|string|null $project_id
      * @param array           $parameters {
      *
@@ -76,7 +81,7 @@ class MergeRequests extends AbstractApi
             })
         ;
         $resolver->setDefined('state')
-            ->setAllowedValues('state', [self::STATE_ALL, self::STATE_MERGED, self::STATE_OPENED, self::STATE_CLOSED])
+            ->setAllowedValues('state', [self::STATE_ALL, self::STATE_MERGED, self::STATE_OPENED, self::STATE_CLOSED, self::STATE_LOCKED])
         ;
         $resolver->setDefined('scope')
             ->setAllowedValues('scope', ['created-by-me', 'assigned-to-me', 'all'])
