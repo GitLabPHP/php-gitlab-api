@@ -363,6 +363,26 @@ class RepositoriesTest extends TestCase
 
     /**
      * @test
+     */
+    public function shouldGetCommitMergeRequests(): void
+    {
+        $expectedArray = [
+            ['id' => 1, 'title' => 'A merge request'],
+            ['id' => 2, 'title' => 'Another merge request'],
+        ];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('projects/1/repository/commits/abcd1234/merge_requests')
+            ->will($this->returnValue($expectedArray))
+        ;
+
+        $this->assertEquals($expectedArray, $api->commitMergeRequests(1, 'abcd1234'));
+    }
+
+    /**
+     * @test
      *
      * @dataProvider dataGetCommitRefsWithParams
      *
