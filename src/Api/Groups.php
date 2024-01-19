@@ -320,6 +320,9 @@ class Groups extends AbstractApi
         $booleanNormalizer = function (Options $resolver, $value): string {
             return $value ? 'true' : 'false';
         };
+        $datetimeNormalizer = function (Options $resolver, \DateTimeInterface $value): string {
+            return $value->format('c');
+        };
 
         $resolver->setDefined('archived')
             ->setAllowedTypes('archived', 'bool')
@@ -366,6 +369,10 @@ class Groups extends AbstractApi
         $resolver->setDefined('with_custom_attributes')
             ->setAllowedTypes('with_custom_attributes', 'bool')
             ->setNormalizer('with_custom_attributes', $booleanNormalizer)
+        ;
+        $resolver->setDefined('last_activity_after')
+            ->setAllowedTypes('last_activity_after', \DateTimeInterface::class)
+            ->setNormalizer('last_activity_after', $datetimeNormalizer)
         ;
 
         return $this->get('groups/'.self::encodePath($id).'/projects', $resolver->resolve($parameters));
