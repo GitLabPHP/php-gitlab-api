@@ -348,11 +348,12 @@ class Projects extends AbstractApi
      *     @var string $name        the name of the user who triggered pipelines
      *     @var string $username    the username of the user who triggered pipelines
      *     @var string $order_by    order pipelines by id, status, ref, updated_at, or user_id (default: id)
-     *     @var string $order       sort pipelines in asc or desc order (default: desc)
+     *     @var string $sort        sort pipelines in asc or desc order (default: desc)
      *     @var string $source      the source of the pipeline
+     *     @var \DateTimeInterface $updated_after Return pipelines updated on or after the given date and time.
+     *     @var \DateTimeInterface $updated_before Return pipelines updated on or before the given date and time.
      * }
      *
-     * @return mixed
      */
     public function pipelines($project_id, array $parameters = [])
     {
@@ -361,7 +362,7 @@ class Projects extends AbstractApi
             return $value ? 'true' : 'false';
         };
         $datetimeNormalizer = function (Options $resolver, \DateTimeInterface $value): string {
-            return $value->format('Y-m-d');
+            return $value->format('c');
         };
 
         $resolver->setDefined('scope')
