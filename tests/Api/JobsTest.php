@@ -298,6 +298,36 @@ class JobsTest extends TestCase
         $this->assertEquals($expectedArray, $api->play(1, 3));
     }
 
+    /**
+     * @test
+     */
+    public function shouldPlayWithVariables(): void
+    {
+        $expectedArray = ['id' => 3, 'name' => 'A job'];
+
+        $jobVariables = [
+            'job_variables_attributes' => [
+                [
+                    'key' => 'TEST_VAR_1',
+                    'value' => 'test1',
+                ],
+                [
+                    'key' => 'TEST_VAR_2',
+                    'value' => 'test2',
+                ],
+            ],
+        ];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('post')
+            ->with('projects/1/jobs/3/play', $jobVariables)
+            ->will($this->returnValue($expectedArray))
+        ;
+
+        $this->assertEquals($expectedArray, $api->play(1, 3, $jobVariables));
+    }
+
     protected function getApiClass()
     {
         return Jobs::class;
