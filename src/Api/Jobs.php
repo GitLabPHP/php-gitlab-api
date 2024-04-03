@@ -240,12 +240,16 @@ class Jobs extends AbstractApi
     /**
      * @param int|string $project_id
      * @param int        $job_id
+     * @param array     $parameters
      *
      * @return mixed
      */
-    public function play($project_id, int $job_id)
+    public function play($project_id, int $job_id, array $parameters = [])
     {
-        return $this->post('projects/'.self::encodePath($project_id).'/jobs/'.self::encodePath($job_id).'/play');
+        $resolver = new OptionsResolver();
+        $resolver->setDefined('job_variables_attributes');
+
+        return $this->post('projects/'.self::encodePath($project_id).'/jobs/'.self::encodePath($job_id).'/play', $resolver->resolve($parameters));
     }
 
     /**
