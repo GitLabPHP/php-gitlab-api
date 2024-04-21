@@ -583,7 +583,7 @@ class MergeRequests extends AbstractApi
      * @param int|string $project_id
      * @param int        $mr_iid
      *
-     * @return mixed
+     * @return array
      */
     public function resourceLabelEvents($project_id, int $mr_iid)
     {
@@ -600,7 +600,7 @@ class MergeRequests extends AbstractApi
      * @param int        $mr_iid
      * @param int        $resource_label_event_id
      *
-     * @return mixed
+     * @return array
      */
     public function resourceLabelEvent($project_id, int $mr_iid, int $resource_label_event_id)
     {
