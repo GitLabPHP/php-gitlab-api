@@ -930,7 +930,7 @@ class MergeRequestsTest extends TestCase
                     'color' => '#0033CC',
                     'description' => '',
                 ],
-                'action' => 'add'
+                'action' => 'add',
             ],
             [
                 'id' => 120,
@@ -951,7 +951,7 @@ class MergeRequestsTest extends TestCase
                     'color' => '#D1D100',
                     'description' => '',
                 ],
-                'action' => 'add'
+                'action' => 'add',
             ],
         ];
 
@@ -985,10 +985,10 @@ class MergeRequestsTest extends TestCase
             'label' => [
                 'id' => 74,
                 'name' => 'p1',
-                'color' => "#0033CC",
-                'description' => ''
+                'color' => '#0033CC',
+                'description' => '',
             ],
-            'action' => 'add'
+            'action' => 'add',
         ];
 
         $api = $this->getApiMock();
