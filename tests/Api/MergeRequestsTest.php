@@ -904,4 +904,99 @@ class MergeRequestsTest extends TestCase
             'skip_ci' => true,
         ]));
     }
+
+    /**
+     * @test
+     */
+    public function shouldGetResourceLabelEvents(): void
+    {
+        $expectedArray = [
+            [
+                'id' => 119,
+                'user' => [
+                    'id' => 1,
+                    'name' => 'Administrator',
+                    'username' => 'root',
+                    'state' => 'active',
+                    'avatar_url' => 'https://www.gravatar.com/avatar/e64c7d89f26bd1972efa854d13d7dd61?s=80&d=identicon',
+                    'web_url' => 'http://gitlab.example.com/root',
+                ],
+                'created_at' => '2018-08-20T06:17:28.394Z',
+                'resource_type' => 'MergeRequest',
+                'resource_id' => 28,
+                'label' => [
+                    'id' => 74,
+                    'name' => 'p1',
+                    'color' => "#0033CC",
+                    'description' => ''
+                ],
+                'action' => 'add'
+            ],
+            [
+                'id' => 120,
+                'user' => [
+                    'id' => 1,
+                    'name' => 'Administrator',
+                    'username' => 'root',
+                    'state' => 'active',
+                    'avatar_url' => 'https://www.gravatar.com/avatar/e64c7d89f26bd1972efa854d13d7dd61?s=80&d=identicon',
+                    'web_url' => 'http://gitlab.example.com/root',
+                ],
+                'created_at' => '2018-08-20T06:17:28.394Z',
+                'resource_type' => 'MergeRequest',
+                'resource_id' => 28,
+                'label' => [
+                    'id' => 41,
+                    'name' => 'project',
+                    'color' => "#D1D100",
+                    'description' => ''
+                ],
+                'action' => 'add'
+            ],
+        ];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('projects/1/merge_requests/2/resource_label_events')
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->resourceLabelEvents(1, 2));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetResourceLabelEventById(): void
+    {
+        $expectedArray = [
+            'id' => 119,
+            'user' => [
+                'id' => 1,
+                'name' => 'Administrator',
+                'username' => 'root',
+                'state' => 'active',
+                'avatar_url' => 'https://www.gravatar.com/avatar/e64c7d89f26bd1972efa854d13d7dd61?s=80&d=identicon',
+                'web_url' => 'http://gitlab.example.com/root',
+            ],
+            'created_at' => '2018-08-20T06:17:28.394Z',
+            'resource_type' => 'MergeRequest',
+            'resource_id' => 28,
+            'label' => [
+                'id' => 74,
+                'name' => 'p1',
+                'color' => "#0033CC",
+                'description' => ''
+            ],
+            'action' => 'add'
+        ];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('projects/1/merge_requests/2/resource_label_events/3')
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->resourceLabelEvent(1, 2, 3));
+    }
 }
