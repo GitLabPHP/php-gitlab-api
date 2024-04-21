@@ -927,8 +927,8 @@ class MergeRequestsTest extends TestCase
                 'label' => [
                     'id' => 74,
                     'name' => 'p1',
-                    'color' => "#0033CC",
-                    'description' => ''
+                    'color' => '#0033CC',
+                    'description' => '',
                 ],
                 'action' => 'add'
             ],
@@ -948,8 +948,8 @@ class MergeRequestsTest extends TestCase
                 'label' => [
                     'id' => 41,
                     'name' => 'project',
-                    'color' => "#D1D100",
-                    'description' => ''
+                    'color' => '#D1D100',
+                    'description' => '',
                 ],
                 'action' => 'add'
             ],
