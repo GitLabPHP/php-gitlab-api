@@ -115,7 +115,7 @@ class Environments extends AbstractApi
         $resolver->setDefined('before')
             ->setRequired('before')
             ->setAllowedTypes('before', DateTimeInterface::class)
-            ->setNormalizer('before', fn (Options $resolver, DateTimeInterface $value): string  => $value->format('c'));
+            ->setNormalizer('before', fn (Options $resolver, DateTimeInterface $value): string => $value->format('c'));
 
         return $this->post(
             $this->getProjectPath(
