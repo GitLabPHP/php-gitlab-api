@@ -204,6 +204,23 @@ See merge request !1',
         $this->assertEquals($expectedBool, $api->stop(1, 3));
     }
 
+    /**
+     * @test
+     */
+    public function shouldStopStaleEnvironment(): void
+    {
+        $expectedValue = [
+            'message' => 'Successfully requested stop for all stale environments',
+        ];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('post')
+            ->with('projects/1/environments/stop_stale')
+            ->will($this->returnValue($expectedValue));
+        $this->assertEquals($expectedValue, $api->stopStale(1, ['before' => new \DateTime('2020-01-01')]));
+    }
+
     protected function getApiClass()
     {
         return Environments::class;
