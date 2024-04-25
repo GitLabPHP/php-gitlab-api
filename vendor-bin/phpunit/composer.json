@@ -1,7 +1,7 @@
 {
     "require": {
         "php": "^7.4.15 || ^8.0.2",
-        "phpunit/phpunit": "^9.6.15 || ^10.5.1"
+        "phpunit/phpunit": "^9.6.17 || ^10.5.13"
     },
     "config": {
         "preferred-install": "dist"

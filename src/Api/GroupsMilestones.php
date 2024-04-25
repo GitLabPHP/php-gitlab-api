@@ -14,6 +14,8 @@ declare(strict_types=1);
 
 namespace Gitlab\Api;
 
+use Symfony\Component\OptionsResolver\Options;
+
 class GroupsMilestones extends AbstractApi
 {
     /**
@@ -32,7 +34,9 @@ class GroupsMilestones extends AbstractApi
      *
      *     @var int[]  $iids   return only the milestones having the given iids
      *     @var string $state  return only active or closed milestones
-     *     @var string $search Return only milestones with a title or description matching the provided string.
+     *     @var string $search Return only milestones with a title or description matching the provided string
+     *     @var \DateTimeInterface $updated_after Return only milestones updated on or after the given datetime. Expected in ISO 8601 format (2019-03-15T08:00:00Z)
+     *     @var \DateTimeInterface $updated_before Return only milestones updated on or before the given datetime. Expected in ISO 8601 format (2019-03-15T08:00:00Z)
      * }
      *
      * @return mixed
@@ -40,6 +44,11 @@ class GroupsMilestones extends AbstractApi
     public function all($group_id, array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
+        $datetimeNormalizer = function (Options $resolver, \DateTimeInterface $value): string {
+            $utc = (new \DateTimeImmutable($value->format(\DateTimeImmutable::RFC3339_EXTENDED)))->setTimezone(new \DateTimeZone('UTC'));
+
+            return $utc->format('Y-m-d\TH:i:s.v\Z');
+        };
         $resolver->setDefined('iids')
             ->setAllowedTypes('iids', 'array')
             ->setAllowedValues('iids', function (array $value) {
@@ -50,6 +59,13 @@ class GroupsMilestones extends AbstractApi
             ->setAllowedValues('state', [self::STATE_ACTIVE, self::STATE_CLOSED])
         ;
         $resolver->setDefined('search');
+
+        $resolver->setDefined('updated_after')
+            ->setAllowedTypes('updated_after', \DateTimeInterface::class)
+            ->setNormalizer('updated_after', $datetimeNormalizer);
+        $resolver->setDefined('updated_before')
+            ->setAllowedTypes('updated_before', \DateTimeInterface::class)
+            ->setNormalizer('updated_before', $datetimeNormalizer);
 
         return $this->get('groups/'.self::encodePath($group_id).'/milestones', $resolver->resolve($parameters));
     }

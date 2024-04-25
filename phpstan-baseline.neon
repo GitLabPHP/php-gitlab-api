@@ -21,6 +21,16 @@ parameters:
 			path: src/Api/AbstractApi.php
 
 		-
+			message: "#^PHPDoc tag @return contains generic type Http\\\\Promise\\\\Promise\\<Psr\\\\Http\\\\Message\\\\ResponseInterface\\> but interface Http\\\\Promise\\\\Promise is not generic\\.$#"
+			count: 1
+			path: src/HttpClient/Plugin/Authentication.php
+
+		-
+			message: "#^PHPDoc tag @return contains generic type Http\\\\Promise\\\\Promise\\<Psr\\\\Http\\\\Message\\\\ResponseInterface\\> but interface Http\\\\Promise\\\\Promise is not generic\\.$#"
+			count: 1
+			path: src/HttpClient/Plugin/ExceptionThrower.php
+
+		-
 			message: "#^Cannot cast mixed to string\\.$#"
 			count: 1
 			path: src/HttpClient/Util/QueryStringBuilder.php

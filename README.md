@@ -28,7 +28,7 @@ This version supports [PHP](https://php.net) 7.4-8.3. To get started, simply req
 ### Standard Installation
 
 ```bash
-$ composer require "m4tthumphrey/php-gitlab-api:^11.13" \
+$ composer require "m4tthumphrey/php-gitlab-api:^11.14" \
   "guzzlehttp/guzzle:^7.8" "http-interop/http-factory-guzzle:^1.2"
 ```
 
@@ -37,7 +37,7 @@ $ composer require "m4tthumphrey/php-gitlab-api:^11.13" \
 #### Laravel:
 
 ```bash
-$ composer require "graham-campbell/gitlab:^7.4"
+$ composer require "graham-campbell/gitlab:^7.5"
 ```
 
 #### Symfony:

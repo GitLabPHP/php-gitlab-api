@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.16.0@2897ba636551a8cb61601cc26f6ccfbba6c36591">
+<files psalm-version="5.23.1@8471a896ccea3526b26d082f4461eeea467f10a4">
   <file src="src/Api/AbstractApi.php">
     <InvalidArgument>
       <code><![CDATA[function () use ($filename, $mode, &$ex): void {
@@ -16,6 +16,16 @@
     <TypeDoesNotContainType>
       <code><![CDATA['is_int']]></code>
     </TypeDoesNotContainType>
+  </file>
+  <file src="src/HttpClient/Plugin/Authentication.php">
+    <TooManyTemplateParams>
+      <code><![CDATA[Promise<ResponseInterface>]]></code>
+    </TooManyTemplateParams>
+  </file>
+  <file src="src/HttpClient/Plugin/ExceptionThrower.php">
+    <TooManyTemplateParams>
+      <code><![CDATA[Promise<ResponseInterface>]]></code>
+    </TooManyTemplateParams>
   </file>
   <file src="src/ResultPager.php">
     <InaccessibleProperty>

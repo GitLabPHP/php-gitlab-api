@@ -107,11 +107,11 @@ class MergeRequestsTest extends TestCase
         $expectedArray = $this->getMultipleMergeRequestsData();
 
         $createdAfter = new \DateTime('2018-01-01 00:00:00');
-        $createdBefore = new \DateTime('2018-01-31 00:00:00');
+        $createdBefore = new \DateTime('2018-01-31 12:00:00.123+03:00');
 
         $expectedWithArray = [
-            'created_after' => $createdAfter->format(\DATE_ATOM),
-            'created_before' => $createdBefore->format(\DATE_ATOM),
+            'created_after' => '2018-01-01T00:00:00.000Z',
+            'created_before' => '2018-01-31T09:00:00.123Z',
         ];
 
         $api = $this->getApiMock();
