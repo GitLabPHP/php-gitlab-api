@@ -350,10 +350,9 @@ class Projects extends AbstractApi
      *     @var string $order_by    order pipelines by id, status, ref, updated_at, or user_id (default: id)
      *     @var string $sort        sort pipelines in asc or desc order (default: desc)
      *     @var string $source      the source of the pipeline
-     *     @var \DateTimeInterface $updated_after Return pipelines updated on or after the given date and time.
+     *     @var \DateTimeInterface $updated_after Return pipelines updated on or after the given date and time
      *     @var \DateTimeInterface $updated_before Return pipelines updated on or before the given date and time.
      * }
-     *
      */
     public function pipelines($project_id, array $parameters = [])
     {
