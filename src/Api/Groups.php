@@ -309,7 +309,8 @@ class Groups extends AbstractApi
      *     @var bool   $with_merge_requests_enabled Limit by projects with merge requests feature enabled (default is false)
      *     @var bool   $with_shared                 Include projects shared to this group (default is true)
      *     @var bool   $include_subgroups           Include projects in subgroups of this group (default is false)
-     *     @var bool   $with_custom_attributes      Include custom attributes in response (admins only).
+     *     @var bool   $with_custom_attributes      Include custom attributes in response (admins only)
+     *     @var \DateTimeInterface $last_activity_after Limit by projects with last_activity after specified time
      * }
      *
      * @return mixed
@@ -319,6 +320,9 @@ class Groups extends AbstractApi
         $resolver = $this->createOptionsResolver();
         $booleanNormalizer = function (Options $resolver, $value): string {
             return $value ? 'true' : 'false';
+        };
+        $datetimeNormalizer = function (Options $resolver, \DateTimeInterface $value): string {
+            return $value->format('c');
         };
 
         $resolver->setDefined('archived')
@@ -366,6 +370,10 @@ class Groups extends AbstractApi
         $resolver->setDefined('with_custom_attributes')
             ->setAllowedTypes('with_custom_attributes', 'bool')
             ->setNormalizer('with_custom_attributes', $booleanNormalizer)
+        ;
+        $resolver->setDefined('last_activity_after')
+            ->setAllowedTypes('last_activity_after', \DateTimeInterface::class)
+            ->setNormalizer('last_activity_after', $datetimeNormalizer)
         ;
 
         return $this->get('groups/'.self::encodePath($id).'/projects', $resolver->resolve($parameters));
