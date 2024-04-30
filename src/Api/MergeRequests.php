@@ -220,6 +220,22 @@ class MergeRequests extends AbstractApi
     /**
      * @param int|string $project_id
      * @param int        $mr_iid
+     *
+     * @return mixed
+     */
+    public function remove($project_id, int $mr_iid)
+    {
+        return $this->delete(
+            $this->getProjectPath(
+                $project_id,
+                'merge_requests/'.self::encodePath($mr_iid)
+            )
+        );
+    }
+
+    /**
+     * @param int|string $project_id
+     * @param int        $mr_iid
      * @param array      $parameters
      *
      * @return mixed
