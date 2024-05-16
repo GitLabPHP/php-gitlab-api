@@ -1708,6 +1708,7 @@ class Projects extends AbstractApi
      * @param int|string $project_id
      * @param int        $token_id
      * @param array      $parameters {
+     *
      *     @var \DateTimeInterface $expires_at  the token expires at midnight UTC on that date
      * }
      *
