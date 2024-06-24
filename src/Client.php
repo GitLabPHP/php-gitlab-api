@@ -393,6 +393,14 @@ class Client
     }
 
     /**
+     * @return Topics
+     */
+    public function topics(): Topics
+    {
+        return new Topics($this);
+    }
+
+    /**
      * @return Users
      */
     public function users(): Users
