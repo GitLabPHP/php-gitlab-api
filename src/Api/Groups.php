@@ -305,6 +305,7 @@ class Groups extends AbstractApi
      *     @var bool   $simple                      return only the ID, URL, name, and path of each project
      *     @var bool   $owned                       limit by projects owned by the current user
      *     @var bool   $starred                     limit by projects starred by the current user
+     *     @var string $topic                       limit by projects with the given topic
      *     @var bool   $with_issues_enabled         Limit by projects with issues feature enabled (default is false)
      *     @var bool   $with_merge_requests_enabled Limit by projects with merge requests feature enabled (default is false)
      *     @var bool   $with_shared                 Include projects shared to this group (default is true)
@@ -347,6 +348,7 @@ class Groups extends AbstractApi
             ->setAllowedTypes('starred', 'bool')
             ->setNormalizer('starred', $booleanNormalizer)
         ;
+        $resolver->setDefined('topic');
         $resolver->setDefined('with_issues_enabled')
             ->setAllowedTypes('with_issues_enabled', 'bool')
             ->setNormalizer('with_issues_enabled', $booleanNormalizer)
