@@ -66,7 +66,6 @@ class Registry extends AbstractApi
         );
     }
 
-
     /**
      * @see https://docs.gitlab.com/ee/api/container_registry.html#get-details-of-a-registry-repository-tag
      *
@@ -85,7 +84,6 @@ class Registry extends AbstractApi
             )
         );
     }
-
 
     /**
      * @see https://docs.gitlab.com/ee/api/container_registry.html#delete-a-registry-repository-tag

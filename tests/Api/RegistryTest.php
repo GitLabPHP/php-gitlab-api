@@ -70,7 +70,6 @@ class RegistryTest extends TestCase
         $this->assertEquals($expectedArray, $api->repositoryTags(1, 1));
     }
 
-
     /**
      * @test
      */

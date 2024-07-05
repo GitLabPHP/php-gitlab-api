@@ -1034,6 +1034,7 @@ class Groups extends AbstractApi
 
     /**
      * Get a list of registry repositories in a group.
+     *
      * @see https://docs.gitlab.com/ee/api/container_registry.html#within-a-group
      *
      * @param $id: The ID of a group
