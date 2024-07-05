@@ -1838,6 +1838,7 @@ class Projects extends AbstractApi
      *
      * @param int|string $project_id
      * @param array $parameters {
+     *
      *     @var bool $tags       If the parameter is included as true, each repository includes an array of "tags" in the response.
      *     @var bool $tags_count If the parameter is included as true, each repository includes "tags_count" in the response.
      * }

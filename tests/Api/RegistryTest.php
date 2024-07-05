@@ -60,8 +60,7 @@ class RegistryTest extends TestCase
      */
     public function shouldGetRepositoryTags(): void
     {
-        $expectedArray = [['name' => "A", 'path' => 'group/project:A'], ['name' => "B", 'path' => 'group/project:B']];
-
+        $expectedArray = [['name' => 'A', 'path' => 'group/project:A'], ['name' => 'B', 'path' => 'group/project:B']];
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('get')
@@ -77,7 +76,7 @@ class RegistryTest extends TestCase
      */
     public function shouldGetRepositoryTag(): void
     {
-        $expectedArray = ['name' => "A", 'path' => 'group/project:A'];
+        $expectedArray = ['name' => 'A', 'path' => 'group/project:A'];
 
         $api = $this->getApiMock();
         $api->expects($this->once())

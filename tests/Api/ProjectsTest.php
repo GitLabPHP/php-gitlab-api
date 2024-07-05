@@ -3076,7 +3076,7 @@ class ProjectsTest extends TestCase
     {
         $expectedArray = [
             ['id' => 1, 'name' => 'A registry', 'tags' => ['1.0', '1.1'], 'tags_count' => 2],
-            ['id' => 2, 'name' => 'Another registry', 'tags' => ['2.0', '2.1'], 'tags_count' => 2]
+            ['id' => 2, 'name' => 'Another registry', 'tags' => ['2.0', '2.1'], 'tags_count' => 2],
         ];
 
         $api = $this->getApiMock();
@@ -3084,7 +3084,7 @@ class ProjectsTest extends TestCase
             ->method('get')
             ->with('projects/123/registry/repositories', [
                 'tags' => true,
-                'tags_count' => true
+                'tags_count' => true,
             ])
             ->will($this->returnValue($expectedArray));
 
