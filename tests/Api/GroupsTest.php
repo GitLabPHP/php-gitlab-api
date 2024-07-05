@@ -972,4 +972,24 @@ class GroupsTest extends TestCase
             'sort' => 'desc',
         ]));
     }
+
+    /**
+     * @test
+     */
+    public function shouldGetGroupRegistryRepositories(): void
+    {
+        $expectedArray = [
+            ['id' => 1, 'name' => 'A registry'],
+            ['id' => 2, 'name' => 'Another registry'],
+        ];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('groups/1/registry/repositories')
+            ->will($this->returnValue($expectedArray))
+        ;
+
+        $this->assertEquals($expectedArray, $api->registryRepositories(1));
+    }
 }

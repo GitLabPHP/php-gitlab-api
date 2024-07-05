@@ -1832,4 +1832,32 @@ class Projects extends AbstractApi
 
         return $this->get('projects/'.self::encodePath($id).'/search', $resolver->resolve($parameters));
     }
+
+    /**
+     * @see https://docs.gitlab.com/ee/api/container_registry.html#within-a-project
+     *
+     * @param int|string $project_id
+     * @param array $parameters {
+     *     @var bool $tags       If the parameter is included as true, each repository includes an array of "tags" in the response.
+     *     @var bool $tags_count If the parameter is included as true, each repository includes "tags_count" in the response.
+     * }
+     *
+     * @return mixed
+     */
+    public function registryRepositories($project_id, array $parameters = [])
+    {
+        $resolver = $this->createOptionsResolver();
+        $booleanNormalizer = function (Options $resolver, $value): string {
+            return $value ? 'true' : 'false';
+        };
+
+        $resolver->setDefined('tags')
+            ->setAllowedTypes('tags', 'bool')
+            ->setNormalizer('tags', $booleanNormalizer);
+        $resolver->setDefined('tags_count')
+            ->setAllowedTypes('tags_count', 'bool')
+            ->setNormalizer('tags_count', $booleanNormalizer);
+
+        return $this->get($this->getProjectPath($project_id, 'registry/repositories'), $resolver->resolve($parameters));
+    }
 }
