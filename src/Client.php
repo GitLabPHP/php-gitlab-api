@@ -337,7 +337,6 @@ class Client
         return new Projects($this);
     }
 
-
     /**
      * @return Registry
      */
