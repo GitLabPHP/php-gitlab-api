@@ -3049,4 +3049,45 @@ class ProjectsTest extends TestCase
             'sort' => 'desc',
         ]));
     }
+
+    /**
+     * @test
+     */
+    public function shouldGetProjectRegistryRepositories(): void
+    {
+        $expectedArray = [
+            ['id' => 1, 'name' => 'A registry'],
+            ['id' => 2, 'name' => 'Another registry'],
+        ];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('projects/123/registry/repositories')
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->registryRepositories(123));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetProjectRegistryRepositoriesTags(): void
+    {
+        $expectedArray = [
+            ['id' => 1, 'name' => 'A registry', 'tags' => ['1.0', '1.1'], 'tags_count' => 2],
+            ['id' => 2, 'name' => 'Another registry', 'tags' => ['2.0', '2.1'], 'tags_count' => 2],
+        ];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('get')
+            ->with('projects/123/registry/repositories', [
+                'tags' => true,
+                'tags_count' => true,
+            ])
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->registryRepositories(123, ['tags' => true, 'tags_count' => true]));
+    }
 }

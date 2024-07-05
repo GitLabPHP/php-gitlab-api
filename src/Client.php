@@ -32,6 +32,7 @@ use Gitlab\Api\MergeRequests;
 use Gitlab\Api\Milestones;
 use Gitlab\Api\ProjectNamespaces;
 use Gitlab\Api\Projects;
+use Gitlab\Api\Registry;
 use Gitlab\Api\Repositories;
 use Gitlab\Api\RepositoryFiles;
 use Gitlab\Api\ResourceIterationEvents;
@@ -334,6 +335,14 @@ class Client
     public function projects(): Projects
     {
         return new Projects($this);
+    }
+
+    /**
+     * @return Registry
+     */
+    public function registry(): Registry
+    {
+        return new Registry($this);
     }
 
     /**

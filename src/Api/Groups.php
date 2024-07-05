@@ -1031,4 +1031,18 @@ class Groups extends AbstractApi
 
         return $this->get('groups/'.self::encodePath($id).'/search', $resolver->resolve($parameters));
     }
+
+    /**
+     * Get a list of registry repositories in a group.
+     *
+     * @see https://docs.gitlab.com/ee/api/container_registry.html#within-a-group
+     *
+     * @param $id: The ID of a group
+     *
+     * @return mixed
+     */
+    public function registryRepositories(int $id)
+    {
+        return $this->get('groups/'.self::encodePath($id).'/registry/repositories');
+    }
 }
