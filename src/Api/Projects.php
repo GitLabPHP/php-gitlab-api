@@ -1717,6 +1717,17 @@ class Projects extends AbstractApi
 
     /**
      * @param int|string $project_id
+     * @param int|string $token_id
+     *
+     * @return mixed
+     */
+    public function rotateProjectAccessToken($project_id, $token_id)
+    {
+        return $this->post($this->getProjectPath($project_id, 'access_tokens/'.$token_id.'/rotate'));
+    }
+
+    /**
+     * @param int|string $project_id
      *
      * @return mixed
      */

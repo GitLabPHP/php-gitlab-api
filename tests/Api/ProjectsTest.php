@@ -2955,6 +2955,33 @@ class ProjectsTest extends TestCase
     /**
      * @test
      */
+    public function shouldRotateProjectAccessToken(): void
+    {
+        $expectedArray = [
+            'user_id' => 141,
+            'scopes' => [
+                'api',
+            ],
+            'name' => 'token',
+            'expires_at' => '2021-01-31',
+            'id' => 3,
+            'active' => true,
+            'created_at' => '2021-01-20T22:11:48.151Z',
+            'revoked' => false,
+        ];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('post')
+            ->with('projects/1/access_tokens/2/rotate')
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedBool, $api->rotateProjectAccessToken(1, 2));
+    }
+
+    /**
+     * @test
+     */
     public function shouldUploadAvatar(): void
     {
         $emptyPNGContents = 'iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAYAAABccqhmAAACYElEQVR42u3UMQEAAAjDMFCO9GEAByQSerQrmQJeagMAAwAMADAAwAAAAwAMADAAwAAAAwAMADAAwAAAAwAMADAAwAAAAwAMADAAwAAAAwAMADAAwAAAAwAMADAAwAAAAwAMADAAwAAAAwAMADAAwADAAAwADAAwAMAAAAMADAAwAMAAAAMADAAwAMAAAAMADAAwAMAAAAMADAAwAMAAAAMADAAwAMAAAAMADAAwAMAAAAMADAAwAMAAAAMADAAwAMAAAAMAAzAAMADAAAADAAwAMADAAAADAAwAMADAAAADAAwAMADAAAADAAwAMADAAAADAAwAMADAAAADAAwAMADAAAADAAwAMADAAAADAAwAMADAAAADAAwADMAAwAAAAwAMADAAwAAAAwAMADAAwAAAAwAMADAAwAAAAwAMADAAwAAAAwAMADAAwAAAAwAMADAAwAAAAwAMADAAwAAAAwAMADAAwAAAAwAMADAAMAAZwAAAAwAMADAAwAAAAwAMADAAwAAAAwAMADAAwAAAAwAMADAAwAAAAwAMADAAwAAAAwAMADAAwAAAAwAMADAAwAAAAwAMADAAwAAAAwAMADAAMADAAAADAAwAMADAAAADAAwAMADAAAADAAwAMADAAAADAAwAMADAAAADAAwAMADAAAADAAwAMADAAAADAAwAMADAAAADAAwAMADAAAADAAwAMAAwAMAAAAMADAAwAMAAAAMADAAwAMAAAAMADAAwAMAAAAMADAAwAMAAAAMADAAwAMAAAAMADAAwAMAAAAMADAAwAMAAAAMADAAwAOCybrx+H1CTHLYAAAAASUVORK5CYII=';
