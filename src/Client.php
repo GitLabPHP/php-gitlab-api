@@ -123,7 +123,7 @@ class Client
      *
      * @return void
      */
-    public function __construct(Builder $httpClientBuilder = null)
+    public function __construct(?Builder $httpClientBuilder = null)
     {
         $this->httpClientBuilder = $builder = $httpClientBuilder ?? new Builder();
         $this->responseHistory = new History();
@@ -425,7 +425,7 @@ class Client
      *
      * @return void
      */
-    public function authenticate(string $token, string $authMethod, string $sudo = null): void
+    public function authenticate(string $token, string $authMethod, ?string $sudo = null): void
     {
         $this->getHttpClientBuilder()->removePlugin(Authentication::class);
         $this->getHttpClientBuilder()->addPlugin(new Authentication($authMethod, $token, $sudo));
