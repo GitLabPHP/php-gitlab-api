@@ -1890,7 +1890,7 @@ class ProjectsTest extends TestCase
             'visibility' => 'public',
             'mr_default_target_self' => 'true',
         ];
-        
+
         $api = $this->getApiMock();
         $api->expects($this->once())
             ->method('post')
