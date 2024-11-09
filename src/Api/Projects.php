@@ -74,8 +74,16 @@ class Projects extends AbstractApi
             ->setAllowedValues('visibility', ['public', 'internal', 'private'])
         ;
         $orderBy = [
-            'id', 'name', 'path', 'created_at', 'updated_at', 'last_activity_at',
-            'repository_size', 'storage_size', 'packages_size', 'wiki_size',
+            'id',
+            'name',
+            'path',
+            'created_at',
+            'updated_at',
+            'last_activity_at',
+            'repository_size',
+            'storage_size',
+            'packages_size',
+            'wiki_size',
         ];
         $resolver->setDefined('order_by')
             ->setAllowedValues('order_by', $orderBy)
@@ -379,12 +387,12 @@ class Projects extends AbstractApi
         $resolver->setDefined('name');
         $resolver->setDefined('username');
         $resolver->setDefined('updated_after')
-                 ->setAllowedTypes('updated_after', \DateTimeInterface::class)
-                 ->setNormalizer('updated_after', $datetimeNormalizer)
+            ->setAllowedTypes('updated_after', \DateTimeInterface::class)
+            ->setNormalizer('updated_after', $datetimeNormalizer)
         ;
         $resolver->setDefined('updated_before')
-                 ->setAllowedTypes('updated_before', \DateTimeInterface::class)
-                 ->setNormalizer('updated_before', $datetimeNormalizer)
+            ->setAllowedTypes('updated_before', \DateTimeInterface::class)
+            ->setNormalizer('updated_before', $datetimeNormalizer)
         ;
         $resolver->setDefined('order_by')
             ->setAllowedValues('order_by', ['id', 'status', 'ref', 'updated_at', 'user_id'])
@@ -1089,8 +1097,16 @@ class Projects extends AbstractApi
             ->setAllowedValues('visibility', ['public', 'internal', 'private'])
         ;
         $orderBy = [
-            'id', 'name', 'path', 'created_at', 'updated_at', 'last_activity_at',
-            'repository_size', 'storage_size', 'packages_size', 'wiki_size',
+            'id',
+            'name',
+            'path',
+            'created_at',
+            'updated_at',
+            'last_activity_at',
+            'repository_size',
+            'storage_size',
+            'packages_size',
+            'wiki_size',
         ];
         $resolver->setDefined('order_by')
             ->setAllowedValues('order_by', $orderBy)
@@ -1150,9 +1166,15 @@ class Projects extends AbstractApi
      * @param int|string $project_id
      * @param array      $parameters {
      *
-     *     @var string $namespace      The ID or path of the namespace that the project will be forked to
-     *     @var string $path           The path of the forked project (optional)
-     *     @var string $name           The name of the forked project (optional)
+     *     @var string  $namespace                  (Deprecated) The ID or path of the namespace that the project will be forked to (optional)
+     *     @var int     $namespace_id               The ID of the namespace that the project is forked to. (optional)
+     *     @var string  $namespace_path             The path of the namespace that the project is forked to. (optional)
+     *     @var string  $path                       The path of the forked project (optional)
+     *     @var string  $name                       The name of the forked project (optional)
+     *     @var string  $branches                   The branches to fork (empty for all branches) (optional)
+     *     @var string  $description                The description assigned to the resultant project after forking (optional)
+     *     @var boolean $mr_default_target_self     For forked projects, target merge requests to this project. If false, the target is the upstream project. (optional)
+     *     @var string  $visibility                 The visibility level assigned to the resultant project after forking. (optional)
      * }
      *
      * @return mixed
@@ -1160,7 +1182,33 @@ class Projects extends AbstractApi
     public function fork($project_id, array $parameters = [])
     {
         $resolver = new OptionsResolver();
-        $resolver->setDefined(['namespace', 'path', 'name']);
+        $resolver->setDefined('namespace')
+            ->setDeprecated('namespace', '13.0', 'The "namespace" parameter is deprecated. Use "namespace_id" or "namespace_path" instead.')
+        ;
+        $resolver->setDefined('namespace_id')
+            ->setAllowedTypes('namespace_id', 'int')
+        ;
+        $resolver->setDefined('namespace_path')
+            ->setAllowedTypes('namespace_path', 'string')
+        ;
+        $resolver->setDefined('path')
+            ->setAllowedTypes('path', 'string')
+        ;
+        $resolver->setDefined('name')
+            ->setAllowedTypes('name', 'string')
+        ;
+        $resolver->setDefined('branches')
+            ->setAllowedTypes('branches', 'string')
+        ;
+        $resolver->setDefined('description')
+            ->setAllowedTypes('description', 'string')
+        ;
+        $resolver->setDefined('mr_default_target_self')
+            ->setAllowedTypes('mr_default_target_self', 'bool')
+        ;
+        $resolver->setDefined('visibility')
+            ->setAllowedValues('visibility', ['private', 'internal', 'public'])
+        ;
 
         $resolved = $resolver->resolve($parameters);
 

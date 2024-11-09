@@ -1879,6 +1879,30 @@ class ProjectsTest extends TestCase
     /**
      * @test
      */
+    public function shouldForkWithAllParametersNamespacePath(): void
+    {
+        $expectedArray = [
+            'branches' => 'master',
+            'namespace_path' => 'new_namespace',
+            'path' => 'new_path',
+            'name' => 'new_name',
+            'description' => 'new_description',
+            'visibility' => 'public',
+            'mr_default_target_self' => 'true',
+        ];
+
+        $api = $this->getApiMock();
+        $api->expects($this->once())
+            ->method('post')
+            ->with('projects/1/fork', $expectedArray)
+            ->will($this->returnValue($expectedArray));
+
+        $this->assertEquals($expectedArray, $api->fork(1, $expectedArray));
+    }
+
+    /**
+     * @test
+     */
     public function shouldCreateForkRelation(): void
     {
         $expectedArray = ['project_id' => 1, 'forked_id' => 2];
