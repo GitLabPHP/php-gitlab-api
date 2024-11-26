@@ -419,7 +419,7 @@ class Repositories extends AbstractApi
      *
      * @return mixed
      */
-    public function compare($project_id, string $fromShaOrMaster, string $toShaOrMaster, bool $straight = false, string $fromProjectId = null)
+    public function compare($project_id, string $fromShaOrMaster, string $toShaOrMaster, bool $straight = false, ?string $fromProjectId = null)
     {
         $params = [
             'from' => $fromShaOrMaster,

@@ -466,7 +466,7 @@ class Projects extends AbstractApi
      *
      * @return mixed
      */
-    public function createPipeline($project_id, string $commit_ref, array $variables = null)
+    public function createPipeline($project_id, string $commit_ref, ?array $variables = null)
     {
         $parameters = [];
 
@@ -588,7 +588,7 @@ class Projects extends AbstractApi
      *
      * @return mixed
      */
-    public function addMember($project_id, int $user_id, int $access_level, string $expires_at = null)
+    public function addMember($project_id, int $user_id, int $access_level, ?string $expires_at = null)
     {
         $params = [
             'user_id' => $user_id,
@@ -609,7 +609,7 @@ class Projects extends AbstractApi
      *
      * @return mixed
      */
-    public function saveMember($project_id, int $user_id, int $access_level, string $expires_at = null)
+    public function saveMember($project_id, int $user_id, int $access_level, ?string $expires_at = null)
     {
         $params = [
             'access_level' => $access_level,
@@ -868,7 +868,7 @@ class Projects extends AbstractApi
      *
      * @return mixed
      */
-    public function deployTokens($project_id, bool $active = null)
+    public function deployTokens($project_id, ?bool $active = null)
     {
         return $this->get($this->getProjectPath($project_id, 'deploy_tokens'), (null !== $active) ? ['active' => $active] : []);
     }
