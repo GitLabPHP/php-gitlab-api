@@ -91,7 +91,7 @@ class Groups extends AbstractApi
      *
      * @return mixed
      */
-    public function create(string $name, string $path, string $description = null, string $visibility = 'private', bool $lfs_enabled = null, bool $request_access_enabled = null, int $parent_id = null, int $shared_runners_minutes_limit = null)
+    public function create(string $name, string $path, ?string $description = null, string $visibility = 'private', ?bool $lfs_enabled = null, ?bool $request_access_enabled = null, ?int $parent_id = null, ?int $shared_runners_minutes_limit = null)
     {
         $params = [
             'name' => $name,
@@ -917,7 +917,7 @@ class Groups extends AbstractApi
      *
      * @return mixed
      */
-    public function deployTokens($group_id, bool $active = null)
+    public function deployTokens($group_id, ?bool $active = null)
     {
         return $this->get('groups/'.self::encodePath($group_id).'/deploy_tokens', (null !== $active) ? ['active' => $active] : []);
     }
