@@ -1637,9 +1637,9 @@ class Projects extends AbstractApi
      *
      * @return mixed
      */
-    public function projectAccessTokens($project_id)
+    public function projectAccessTokens($project_id, bool $active = null)
     {
-        return $this->get($this->getProjectPath($project_id, 'access_tokens'));
+        return $this->get($this->getProjectPath($project_id, 'access_tokens'), (null !== $active) ? ['state' => $active ? 'active' : 'inactive'] : []);
     }
 
     /**
