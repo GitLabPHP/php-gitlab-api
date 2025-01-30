@@ -866,6 +866,10 @@ class Groups extends AbstractApi
             ->setNormalizer('top_level_only', $booleanNormalizer)
         ;
 
+        $resolver->setDefined('visibility')
+            ->setAllowedValues('visibility', ['public', 'internal', 'private'])
+        ;
+
         return $resolver;
     }
 
